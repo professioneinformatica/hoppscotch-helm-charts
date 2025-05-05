@@ -21,7 +21,7 @@ spec:
       labels:
         app: {{ .Release.Name }}-community
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}        
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name | default (printf "%s-sa" .Release.Name) }}

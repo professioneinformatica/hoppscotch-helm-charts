@@ -2,7 +2,7 @@
 global:
   externalIP: "0.0.0.0" # Example: "192.168.1.1"
   namespace: "default" # Example: "hoppscotch"
-
+    
 # Community-specific settings
 community:
   replicas: 1 # Example: 3
@@ -37,6 +37,7 @@ community:
       enable: false
       useCustomConfigs: false
       addressFrom: '"Dummy Name" <dummy@example.com>'
+      
       smtp:
         url: "smtps://user:pass@smtp.example.com"
         host: "smtp.example.com"
@@ -63,15 +64,29 @@ community:
       dataEncryptionKey: "data encryption key with 32 char"
 
     urls:
-      base: "http://frontend.example.com"
-      shortcode: "http://frontend.example.com"
-      admin: "http://admin.example.com"
-      backend:
-        gql: "http://backend.example.com/graphql"
-        ws: "ws://backend.example.com/graphql"
-        api: "http://backend.example.com/v1"
-      redirect: "http://frontend.example.com"
-      whitelistedOrigins: "http://backend.example.com,http://frontend.example.com,http://admin.example.com"
+      defaultValues:
+        baseUrl: "[scheme]://[hostName].[baseDomain]/[queryString]"
+        scheme: "https"
+        hostName: "frontend" # Example: "frontend"
+        baseDomain: "example.com" # Example: "example.com"
+        queryString: ""
+      web: 
+        hostName: "frontend"
+      shortcode: 
+        hostName: "frontend"
+      admin: 
+        hostName: "admin"
+      gql:
+        hostName: "backend"
+        queryString: "graphql"
+      ws:
+        hostName: "backend"
+        scheme: "wss"
+      api:
+        hostName: "backend"
+        queryString: "v1"
+      redirect: 
+        hostName: "frontend"
 
     auth:
       allowedProviders: "EMAIL" # "GOOGLE,MICROSOFT,GITHUB,EMAIL"

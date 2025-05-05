@@ -29,17 +29,24 @@ data:
   REFRESH_TOKEN_VALIDITY: {{ .Values.community.config.authjwt.refreshTokenValidity | quote }}
   ACCESS_TOKEN_VALIDITY: {{ .Values.community.config.authjwt.accessTokenValidity | quote }}
   ALLOW_SECURE_COOKIES: {{ .Values.community.config.authjwt.allowSecureCookies | quote }}
-
+ 
   # URLs and Frontend Config
-  VITE_BASE_URL: {{ .Values.community.config.urls.base | quote }}
-  VITE_SHORTCODE_BASE_URL: {{ .Values.community.config.urls.shortcode | quote }}
-  VITE_ADMIN_URL: {{ .Values.community.config.urls.admin | quote }}
-  VITE_BACKEND_GQL_URL: {{ .Values.community.config.urls.backend.gql | quote }}
-  VITE_BACKEND_WS_URL: {{ .Values.community.config.urls.backend.ws | quote }}
-  VITE_BACKEND_API_URL: {{ .Values.community.config.urls.backend.api | quote }}
-  REDIRECT_URL: {{ .Values.community.config.urls.redirect | quote }}
-  WHITELISTED_ORIGINS: {{ .Values.community.config.urls.whitelistedOrigins | quote }}
-
+  {{- $VITE_BASE_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.web "defaultValues" .Values.community.config.urls.defaultValues) }}
+  {{- $VITE_SHORTCODE_BASE_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.shortcode "defaultValues" .Values.community.config.urls.defaultValues) }}
+  {{- $VITE_ADMIN_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.admin "defaultValues" .Values.community.config.urls.defaultValues) }}
+  {{- $VITE_BACKEND_GQL_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.gql "defaultValues" .Values.community.config.urls.defaultValues) }}
+  {{- $VITE_BACKEND_WS_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.ws "defaultValues" .Values.community.config.urls.defaultValues) }}
+  {{- $VITE_BACKEND_API_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.api "defaultValues" .Values.community.config.urls.defaultValues) }}
+  {{- $REDIRECT_URL := include "create_url_withtoken" (dict "url" .Values.community.config.urls.redirect "defaultValues" .Values.community.config.urls.defaultValues) }}
+  VITE_BASE_URL:            {{ $VITE_BASE_URL | quote }}
+  VITE_SHORTCODE_BASE_URL:  {{ $VITE_SHORTCODE_BASE_URL | quote }}
+  VITE_ADMIN_URL:           {{ $VITE_ADMIN_URL | quote }}
+  VITE_BACKEND_GQL_URL:     {{ $VITE_BACKEND_GQL_URL | quote }}
+  VITE_BACKEND_WS_URL:      {{ $VITE_BACKEND_WS_URL | quote }}
+  VITE_BACKEND_API_URL:     {{ $VITE_BACKEND_API_URL | quote }}
+  REDIRECT_URL:             {{ $REDIRECT_URL | quote }}
+  WHITELISTED_ORIGINS:      {{ uniq (list $VITE_BASE_URL $VITE_ADMIN_URL $VITE_BACKEND_API_URL $VITE_BACKEND_GQL_URL $VITE_BACKEND_WS_URL $VITE_SHORTCODE_BASE_URL) | join "," | quote }}
+  
   # community Config
   VITE_ALLOWED_AUTH_PROVIDERS: {{ .Values.community.config.auth.allowedProviders | quote }}
   ENABLE_SUBPATH_BASED_ACCESS: {{ .Values.community.config.community.enableSubpathBasedAccess | quote }}
