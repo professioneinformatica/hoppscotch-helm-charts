@@ -1,14 +1,25 @@
 apiVersion: v1
 entries:
-  hoppscotch:
+  hoppscotch-ce:
   - apiVersion: v2
     appVersion: 2024.12.1
-    created: "2025-05-05T10:04:41.878458395Z"
-    description: A Helm chart for Hoppscotch Enterprise Edition
-    digest: fbb65f03b4052f25e4c1d719711e204c58dd852ca8be8d929c613a32d737f7de
-    name: hoppscotch
+    created: "2025-05-05T10:41:28.826685254Z"
+    description: A Helm chart for Hoppscotch Community Edition
+    digest: faab8b11a9c4a9d1d15fffdb35dbc2e14095503cec222155d786f7d1c4f59afc
+    name: hoppscotch-ce
     type: application
     urls:
-    - https://github.com/professioneinformatica/hoppscotch-helm-charts/releases/download/hoppscotch-0.1.1/hoppscotch-0.1.1.tgz
-    version: 0.1.1
-generated: "2025-05-05T10:04:41.878481488Z"
+    - https://github.com/professioneinformatica/hoppscotch-helm-charts/releases/download/hoppscotch-ce-0.1.2/hoppscotch-ce-0.1.2.tgz
+    version: 0.1.2
+  hoppscotch-ee:
+  - apiVersion: v2
+    appVersion: 2024.12.1
+    created: "2025-05-05T10:41:29.061196296Z"
+    description: A Helm chart for Hoppscotch Enterprise Edition
+    digest: d7e3dc974257db6fff707971c1ead98d83e01310723ddfecb48719b857e761cd
+    name: hoppscotch-ee
+    type: application
+    urls:
+    - https://github.com/professioneinformatica/hoppscotch-helm-charts/releases/download/hoppscotch-ee-0.1.2/hoppscotch-ee-0.1.2.tgz
+    version: 0.1.2
+generated: "2025-05-05T10:41:29.06120929Z"
